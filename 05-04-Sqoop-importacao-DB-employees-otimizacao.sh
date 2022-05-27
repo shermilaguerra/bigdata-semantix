@@ -92,19 +92,38 @@ Realizar com uso do Sqoop - Importações no warehouse /user/hive/warehouse/db_t
 
 
 
-sqoop import --table titles --connect jdbc:mysql://database/employees --username root --password secret -m 8 --as parquetfile --warehouse-dir /user/hive/warehouse/db_test2_4
 
 
 
 4. Importar a tabela titles com 8 mapeadores no formato parquet
+#sqoop import --table titles --connect jdbc:mysql://database/employees --username root --password secret -m 8 --as-parquetfile --warehouse-dir /user/hive/warehouse/db_test2_4
 
 5. Importar a tabela titles com 8 mapeadores no formato parquet e compressão snappy
 
-6. Importar a tabela cp_titles_date com 4 mapeadores (erro)
+#sqoop import --table titles --connect jdbc:mysql://database/employees --username root --password secret -m 8 --as-parquetfile --warehouse-dir /user/hive/warehouse/db_test2_6 --compression-codec org.apache.hadoop.io.compress.SnappyCodec
 
-Importar a tabela cp_titles_date com 4 mapeadores divididos pelo campo título no warehouse /user/hive/warehouse/db_test2_title
-Importar a tabela cp_titles_date com 4 mapeadores divididos pelo campo data no warehouse /user/hive/warehouse/db_test2_date
-Qual a diferença dos registros nulos entre as duas importações?
+6. Importar a tabela cp_titles_date com 4 mapeadores (erro)
+#sqoop import --table cp_titles_date --connect jdbc:mysql://database/employees --username root --password secret -m 4 --warehouse-dir /user/hive/warehouse/db_test2_6_
+#No primary key could be found for table cp_titles_date. Please specify one with --split-by or perform a sequential import with '-m 1'.
+
+
+
+
+A. Importar a tabela cp_titles_date com 4 mapeadores divididos pelo campo título no warehouse /user/hive/warehouse/db_test2_title
+
+
+#sqoop import  "-Dorg.apache.sqoop.splitter.allow_text_splitter=true"  --table cp_titles_date --connect jdbc:mysql://database/employees --username root --password secret -m 4 --warehouse-dir /user/hive/warehouse/db_test2_title --split-by title
+
+B .Importar a tabela cp_titles_date com 4 mapeadores divididos pelo campo data no warehouse /user/hive/warehouse/db_test2_date
+
+# sqoop import  "-Dorg.apache.sqoop.splitter.allow_text_splitter=true"  --table cp_titles_date --connect jdbc:mysql://database/employees --username root --password secret -m 4 --warehouse-dir /user/hive/warehouse/db_test2_date --split-by to_date
+
+19:46
+https://academy.semantix.ai/courses/150/pages/correcao-exercicios-de-importacao-bd-employees-otimizacao?module_item_id=7453
+C .Qual a diferença dos registros nulos entre as duas importações?
+
+hdfs dfs -count -h /user/hive/warehouse/db_test2_date
+7.Qual a diferença dos registros nulos entre as duas importações?
 
           
                       

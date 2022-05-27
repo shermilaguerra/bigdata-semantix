@@ -89,12 +89,35 @@ Realizar com uso do MySQL
 
 
 Realizar com uso do Sqoop - Importações no warehouse /user/hive/warehouse/db_test_<numero_questao> e visualizar no HDFS
+ docker exec -it namenode  bash
+
 
 4. Importar a tabela titles com 8 mapeadores no formato parquet
 
+
+#sqoop import --table titles --connect jdbc:mysql://database/employees --username root --password secret -m 8 --as parquetfile --warehouse-dir /user/hive/warehouse/db_test2_4
+#
+#hdfs dfs -ls -h /user/hive/warehouse/dbtest2_4
+#hdfs dfs -ls -h /user/hive/warehouse/db_test2_4/titles
+#Found 8 items
+#drwxr-xr-x   - root supergroup          0 2022-05-26 21:10 /user/hive/warehouse/db_test2_4/titles/.metadata
+#drwxr-xr-x   - root supergroup          0 2022-05-26 21:13 /user/hive/warehouse/db_test2_4/titles/.signals
+#-rw-r--r--   3 root supergroup    433.1 K 2022-05-26 21:12 /user/hive/warehouse/db_test2_4/titles/12c16666-3231-46af-#b6df-8c9d11d4588f.parquet
+#-rw-r--r--   3 root supergroup    429.3 K 2022-05-26 21:13 /user/hive/warehouse/db_test2_4/titles/4aa7f1db-2610-4d86-a800-3d92fc0428f2.parquet
+#-rw-r--r--   3 root supergroup    491.0 K 2022-05-26 21:13 /user/hive/warehouse/db_test2_4/titles/4ed9401f-7339-47ce-a2f0-c93027d157e3.parquet
+#-rw-r--r--   3 root supergroup    640.9 K 2022-05-26 21:13 /user/hive/warehouse/db_test2_4/titles/79edea0d-e6e3-4f72-942e-a03dc9510b89.parquet
+#-rw-r--r--   3 root supergroup    581.7 K 2022-05-26 21:12 /user/hive/warehouse/db_test2_4/titles/819d03ea-5d62-4d73-9c55-8788d6ab258b.parquet
+#-rw-r--r--   3 root supergroup    642.2 K 2022-05-26 21:12 /user/hive/warehouse/db_test2_4/titles/f0e099fc-6bf2-4712-b2df-b0760d1769a0.parquet
+
+##hdfs dfs -tail /user/hive/warehouse/db_test2_4/titles/12c16666-3231-46af-#b6df-8c9d11d4588f.parquet
+
 5. Importar a tabela titles com 8 mapeadores no formato parquet e compressão snappy
 
+#sqoop import --table titles --connect jdbc:mysql://database/employees --username root --password secret -m 8 --as-parquetfile --warehouse-dir /user/hive/warehouse/db_test2_5 --compress --compression-codec org.apache.hadoop.io.compress.SnappyCodec
+
+
 6. Importar a tabela cp_titles_date com 4 mapeadores (erro)
+14:13
 
 Importar a tabela cp_titles_date com 4 mapeadores divididos pelo campo título no warehouse /user/hive/warehouse/db_test2_title
 Importar a tabela cp_titles_date com 4 mapeadores divididos pelo campo data no warehouse /user/hive/warehouse/db_test2_date

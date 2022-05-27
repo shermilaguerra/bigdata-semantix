@@ -1,4 +1,3 @@
-#############################
                              Sqoop
 #------------------------Ingestão de dados
 -processo de enviar/receber os dados locais para o sistema distribuido
