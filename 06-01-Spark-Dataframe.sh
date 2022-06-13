@@ -1,6 +1,11 @@
-Spark - Exercícios de DataFrame
+                                         Spark - Exercícios de DataFrame
+
+#docker exec -it spark bash
+
+#spark-shell
 
 1. Enviar o diretório local “/input/exercises-data/juros_selic” para o HDFS em “/user/aluno/<nome>/data”
+
 # hdfs dfs -put /input/exercises-data/juros_selic/ /user/aluno/shermila/data/
 #hdfs dfs -ls /user/aluno/shermila/data/
 #Found 5 items
@@ -57,7 +62,7 @@ Spark - Exercícios de DataFrame
 #root
 # |-- data: string (nullable = true)
 # |-- valor: string (nullable = true)
-
+#Observação: valor tem valores reais mas o spark reconhece como string
 
 10. Mostrar os 5 primeiros registros do jurosHiveDF
 #jurosHiveDF.show(5)

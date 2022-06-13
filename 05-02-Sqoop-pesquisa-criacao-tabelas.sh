@@ -2,8 +2,13 @@
                              Sqoop
 Todos os comandos precisam ser executados pelo Sqoop.
 
+docker exec -it namenode bash
+
 1. Mostrar todos os databases
+
 #sqoop list-databases --connect jdbc:mysql://database --username root --password secret
+
+Rpta:
 #information_schema
 #employees
 #hue
@@ -12,8 +17,23 @@ Todos os comandos precisam ser executados pelo Sqoop.
 #sakila
 #sys
 
+
+information_schema
+employees
+hue
+mysql
+performance_schema
+sakila
+sys
+
+
+#sempre vou usar: --connect jdbc:mysql://database --username root --password secret
+
 2. Mostrar todas as tabelas do bd employees
+
 #sqoop list-tables --connect jdbc:mysql://database/employees --username root --password secret
+
+Rpta:
 #current_dept_emp
 #departments
 #dept_emp
@@ -28,6 +48,7 @@ Todos os comandos precisam ser executados pelo Sqoop.
 #mostrar o conteudo da tabela
 #sqoop eval --connect jdbc:mysql://database/employees --username root --password secret --query "select * from departments limit 5"
 #sqoop eval --connect jdbc:mysql://database/employees --username root --password secret --query "insert into departments values('d010', 'BI')"
+
 #INFO tool.EvalSqlTool: 1 row(s) updated.
 
 

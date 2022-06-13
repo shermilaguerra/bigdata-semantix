@@ -10,8 +10,10 @@
 ***Exporta dados
   * Armazenamento do hadoop para um RDBMs.
   
+############################ FIRST STEP  
 #docker exec -it database bash  
 #root@database:/# 
+
   
 ###--My sql - verificar e instalar os banco de dados de testes
 1. Copiar os dados do local para o contêiner database
